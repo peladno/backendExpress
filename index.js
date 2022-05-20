@@ -23,6 +23,6 @@ app.get("/fyh", (request, response) => {
 })
 
 const server = app.listen(PORT, () =>{
-  conbsole.log(`Server http on ${PORT}...`);
+  console.log(`Server http on ${PORT}...`);
 });
 server.on('error', error => console.log("Error on server", error))
