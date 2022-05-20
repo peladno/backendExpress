@@ -21,3 +21,8 @@ app.get("/fyh", (request, response) => {
   let fyh = new Date()
   response.send({ fyh: fyh.toLocaleString() })
 })
+
+const server = app.listen(PORT, () =>{
+  conbsole.log(`Server http on ${PORT}...`);
+});
+server.on('error', error => console.log("Error on server", error))
