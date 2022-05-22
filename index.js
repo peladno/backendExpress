@@ -19,7 +19,7 @@ app.get("/", (request, resolve) => {
   )
 })
 
-/*container.save({
+container.save({
   item: phone,
   price: 10000
 })
@@ -27,6 +27,6 @@ app.get("/", (request, resolve) => {
 container.save({
   item: tv, 
   price:20000
-})*/
+})
 
 
