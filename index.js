@@ -20,13 +20,15 @@ app.get("/", (request, resolve) => {
 })
 
 container.save({
-  item: phone,
+  item: 'phone',
   price: 10000
 })
 
 container.save({
-  item: tv, 
+  item: 'tv', 
   price:20000
 })
+
+console.log(container.getAll());
 
 
