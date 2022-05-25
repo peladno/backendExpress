@@ -19,7 +19,7 @@ class Container {
             await fs.promises.writeFile(this.filename, JSON.stringify(this.data, null, 2))
             return console.log('Data saved!')
         } catch (error) {
-            return console.log(error)
+            console.log(error)
         }
     }
 
@@ -28,8 +28,8 @@ class Container {
             const data = await fs.promises.readFile(this.filename)
             this.data = JSON.parse(data)
             console.log('Data loaded!')
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -54,7 +54,7 @@ class Container {
             const contentById = content.find((i) => i.id == id);
             return contentById;
         } catch (error) {
-            return ('Hubo un error al buscar por ID', error);
+            console.log(error);
         };
     }
 
@@ -64,7 +64,7 @@ class Container {
             const content = JSON.parse(allContent)
             return content;
         } catch (error) {
-            return ('Hubo error', error)
+            console.log(error)
         }
     }
 
@@ -75,8 +75,8 @@ class Container {
             const content = JSON.parse(allContent);
             const product = content.filter((i) => i.id !== id);
             await fs.promises.writeFile(this.filename, JSON.stringify(product, null, 2));
-        } catch (error) {
-            return ('Hubo un error al eliminar el producto con ID ', id)
+        } catch(error) {
+            console.log(error)
         }
     };
 
@@ -86,10 +86,15 @@ class Container {
     };
 
     async randomItems() {
-        const allContent = await fs.promises.readFile(this.filename, 'utf-8');
-        const content = JSON.parse(allContent);
-        const shuffled = [...content].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, 1)
+        try {
+            const allContent = await fs.promises.readFile(this.filename, 'utf-8');
+            const content = JSON.parse(allContent);
+            const shuffled = [...content].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, 1)
+        } catch(error) {
+            console.log(error)
+        }
+        
     }
 
 };
