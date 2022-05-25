@@ -11,24 +11,30 @@ server.on('error', error => console.log("Error on server", error));
 
 const Container = require('./desafioArchivos');
 
-const container = new Container('file.json');
+const products = new Container('file.json');
 
 app.get("/", (request, resolve) => {
   resolve.send(
-    "<h1 style='color: blue;'>Hola a todos</h1>"
+    "<h1>Hola a todos</h1>"
   )
 })
 
-container.save({
-  item: 'phone',
-  price: 10000
+app.get("/productos", async (request, resolve) => {
+  try {
+    const data = await products.getAll();
+    resolve.send(data)
+  } catch (e) {
+    resolve.status(500);
+    resolve.send(e)
+  }
 })
 
-container.save({
-  item: 'tv', 
-  price:20000
+app.get("/productosRandom", async (request, resolve) => {
+  try {
+    const data = await products.randomItems();
+    resolve.send(data)
+  } catch (e) {
+    resolve.status(500);
+    resolve.send(e)
+  }
 })
-
-console.log(container.getAll());
-
-

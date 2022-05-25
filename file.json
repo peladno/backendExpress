@@ -8,5 +8,10 @@
     "item": "tv",
     "price": 20000,
     "id": 2
+  },
+  {
+    "item": "nintendo",
+    "price": 2500000,
+    "id": 3
   }
 ]
