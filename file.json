@@ -13,5 +13,10 @@
     "item": "nintendo",
     "price": 2500000,
     "id": 3
+  },
+  {
+    "item": "ipad",
+    "price": "500000",
+    "id": 4
   }
 ]
