@@ -29,9 +29,9 @@ router.get("/", async (request, resolve) => {
   try {
     const data = await products.getAll();
     resolve.send(data)
-  } catch (e) {
+  } catch (error) {
     resolve.status(500);
-    resolve.send(e)
+    resolve.send(error)
   }
 })
 
@@ -47,9 +47,9 @@ router.get("/:id", async (request, resolve) => {
       resolve.send(data)
     }
 
-  } catch (e) {
+  } catch (error) {
     resolve.status(500);
-    resolve.send(e)
+    resolve.send(error)
   }
 })
 
@@ -61,9 +61,9 @@ router.delete("/:id", async (request, resolve) => {
     await products.deleteById(id);
     resolve.send("Producto deleted");
 
-  } catch (e) {
+  } catch (error) {
     resolve.status(500);
-    resolve.send(e)
+    resolve.send(error)
   }
 })
 
@@ -73,8 +73,23 @@ router.post("/", (request, resolve) => {
   resolve.send("Product saved")
 })
 
-router.put("/:id", (request, resolve) => {
-  const id = Number(request.params.id);
+
+router.put("/:id", async (request, resolve) => {
+
+  try {
+    let newData = {};
+    newData.item = request.body.item;
+    newData.price = request.body.price;
+    newData.id = parseInt(request.params.id);
+    console.log(newData)
+
+    await products.updateItems(newData);
+    resolve.send("Product updated")
+
+  } catch (error) {
+    resolve.status(500);
+    resolve(error)
+  }
 
 })
 

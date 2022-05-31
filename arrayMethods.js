@@ -75,7 +75,7 @@ class Container {
             const content = JSON.parse(allContent);
             const product = content.filter((i) => i.id !== id);
             await fs.promises.writeFile(this.filename, JSON.stringify(product, null, 2));
-        } catch(error) {
+        } catch (error) {
             console.log(error)
         }
     };
@@ -91,12 +91,30 @@ class Container {
             const content = JSON.parse(allContent);
             const shuffled = [...content].sort(() => 0.5 - Math.random());
             return shuffled.slice(0, 1)
-        } catch(error) {
+        } catch (error) {
             console.log(error)
         }
-        
     }
 
+
+    async updateItems(product) {
+        try {
+            const allContent = await fs.promises.readFile(this.filename, 'utf-8');
+            const content = JSON.parse(allContent);
+
+            let indx = content.findIndex((item) => item.id === product.id);
+            if (indx == -1) {
+                return { error }
+            } else {
+                content[indx].item = product.item;
+                content[indx].price = product.price;
+                
+                await fs.promises.writeFile(this.filename, JSON.stringify(content, null, 2));
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 };
 
 
