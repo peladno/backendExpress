@@ -1,0 +1,27 @@
+[
+  {
+    "item": "cocina",
+    "price": 5000,
+    "id": 1
+  },
+  {
+    "item": "tv",
+    "price": 20000,
+    "id": 2
+  },
+  {
+    "item": "nintendo",
+    "price": 6000000,
+    "id": 3
+  },
+  {
+    "item": "ipad",
+    "price": "500000",
+    "id": 4
+  },
+  {
+    "item": "ipad2",
+    "price": "10000058",
+    "id": 5
+  }
+]
