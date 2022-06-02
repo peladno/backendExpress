@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express')
 const Container = require('./arrayMethods');
 const products = new Container('file.json');
 
@@ -16,10 +16,19 @@ app.use(express.urlencoded({ extended: true }))
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
-app.get("/", (request, resolve) => {
-  resolve.render('index')
+
+app.get("/", async (request, resolve) => {
+  const data = await products.getAll();
+  resolve.render('index', {data})
 })
 
-app.get("/products", (request, resolve) => {
-  resolve.render(products)
+app.get("/products", async (request, resolve) => {
+  const data = await products.getAll();
+  resolve.render('productsList',{data})
+})
+
+app.post("/products", (request, resolve) => {
+  const newData = request.body
+  products.save(newData);
+  resolve.send("Product saved")
 })

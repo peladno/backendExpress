@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Productos</title>
 </head>
+
 <body>
-  
+  <h1>Lista de productos</h1>
+  <% if(data.lenght===0) { %>
+    <h2>No se encuentra los datos</h2>
+    <% } else { %>
+      <ul>
+        <% console.log(data) %> 
+        <% data.forEach(product=> { %>
+          <li><%= product.item %></li>
+          <li><%= product.price %></li>
+          <% }); %>
+      </ul>
+      <% } %>
+
 </body>
+
 </html>
