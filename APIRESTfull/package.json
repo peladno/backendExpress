@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/peladno/backendExpress#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "express-router": "^0.0.1"
   }
 }
