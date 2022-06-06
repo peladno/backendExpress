@@ -29,6 +29,5 @@ app.get("/products", async (request, resolve) => {
 app.post("/products", (request, resolve) => {
   const newData = request.body;
   products.save(newData);
-  resolve.send("Product saved");
+  resolve.redirect("/");
 });
-

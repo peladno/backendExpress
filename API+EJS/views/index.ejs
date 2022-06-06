@@ -7,12 +7,18 @@
   <title>Form</title>
 </head>
 <body>
-  <form action="/products" method="post">
-    <label>Product's name</label>
-    <input type="text" name="item" required="required">
-    <label>Price</label>
-    <input type="number" name="price" required="required">
-    <button type="submit">Submit</button>
-  </form>
+  <main>
+    <form action="/products" method="post">
+      <label>Product's name</label>
+      <input type="text" name="item" required="required">
+      <label>Price</label>
+      <input type="number" name="price" required="required">
+      <label>Photo's url</label>
+      <input type="text" name="url" required="required">
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/products">Go to products</a>
+  </main>
+  
 </body>
 </html>

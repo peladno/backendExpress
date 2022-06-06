@@ -13,11 +13,13 @@
     <h2>No se encuentra los datos</h2>
     <% } else { %>
     <ul>
-      <% console.log(data) %> <% data.forEach(product=> { %>
+      <% data.forEach(product=> { %>
       <li><%= product.item %></li>
       <li><%= product.price %></li>
+      <li><img src="<%= product.url %>"></li>
       <% }); %>
     </ul>
     <% } %>
+    <a href="/">Home</a>
   </body>
 </html>

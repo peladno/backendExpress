@@ -1,57 +1,8 @@
 [
   {
-    "item": "cocina",
-    "price": 5000,
+    "item": "imac",
+    "price": "500000",
+    "url": "https://cdn2.iconfinder.com/data/icons/apple-product-icons/256/apple-product-2015-imac.png",
     "id": 1
-  },
-  {
-    "item": "tv",
-    "price": 20000,
-    "id": 2
-  },
-  {
-    "item": "nintendo",
-    "price": 6000000,
-    "id": 3
-  },
-  {
-    "item": "ipad",
-    "price": 500000,
-    "id": 4
-  },
-  {
-    "item": "ipad2",
-    "price": 10000058,
-    "id": 5
-  },
-  {
-    "item": "polera",
-    "price": 522,
-    "id": 6
-  },
-  {
-    "item": "pokemon",
-    "price": 200,
-    "id": 7
-  },
-  {
-    "item": "pikachu",
-    "price": 500,
-    "id": 8
-  },
-  {
-    "item": "pikachu",
-    "price": 500,
-    "id": 9
-  },
-  {
-    "item": "iphone 13",
-    "price": "500566",
-    "id": 10
-  },
-  {
-    "item": "iphone 13",
-    "price": "500566",
-    "id": 11
   }
 ]
