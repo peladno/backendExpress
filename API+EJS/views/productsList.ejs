@@ -4,22 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
     <title>Productos</title>
   </head>
 
   <body>
-    <h1>Lista de productos</h1>
-    <% if(data.lenght===0) { %>
-    <h2>No se encuentra los datos</h2>
-    <% } else { %>
-    <ul>
-      <% data.forEach(product=> { %>
-      <li><%= product.item %></li>
-      <li><%= product.price %></li>
-      <li><img src="<%= product.url %>"></li>
-      <% }); %>
-    </ul>
-    <% } %>
-    <a href="/">Home</a>
+    <main class="mainProducts">
+      <section class="sectionProduct">
+        <h1>Lista de productos</h1>
+        <% if(data.lenght===0) { %>
+        <h2>No se encuentra los datos</h2>
+        <% } else { %>
+        <ul>
+          <% data.forEach(product=> { %>
+          <li><%= product.item %></li>
+          <li><%= product.price %></li>
+          <li><img src="<%= product.url %>" /></li>
+          <% }); %>
+        </ul>
+        <% } %>
+        <a href="/">Home</a>
+      </section>
+    </main>
   </body>
 </html>

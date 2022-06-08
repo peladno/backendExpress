@@ -1,23 +1,25 @@
-
 * {
-    margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  vertical-align: baseline;
+  box-sizing: border-box;
 }
 
 /*form*/
 
 .mainForm {
-  min-height: calc(100vh - 100px);
+  height: 100vh;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: rgba(159, 177, 239, 0.9);
 }
 
 form {
@@ -29,10 +31,10 @@ form {
   border: solid #05060f;
   border-radius: 10px;
   padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .input {
-  max-width: 190px;
   height: 44px;
   background-color: #05060f0a;
   border-radius: 0.5rem;
@@ -67,8 +69,7 @@ form {
   color: #05060fc2;
 }
 
-/*button*/
-/* From uiverse.io by @adamgiebl */
+/*button form */
 button {
   font-family: inherit;
   font-size: 20px;
@@ -132,4 +133,56 @@ button:active {
 
 .linkProducts a {
   text-decoration: none;
+}
+
+/*Product list*/
+.mainProducts {
+  height: 100vh;
+  background-color: rgba(159, 177, 239, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sectionProduct h1 {
+  font-size: clamp(2rem, 2vw, 3rem);
+  text-align: center;
+}
+
+.sectionProduct {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: solid #05060f;
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+section a {
+  text-decoration: none;
+  text-align: right;
+  display: block;
+}
+
+.mainProducts ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  margin: 2rem;
+}
+
+.mainProducts li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  color: #05060f99;
+}
+
+li img {
+  width: 150px;
 }
