@@ -8,10 +8,8 @@ const render = (data) => {
   const html = data
     .map((element) => {
       return `
-      <div>
-        <strong>${element.author}[${element.date}, ${element.time}]:</strong>
-        <em>${element.text}</em>
-      </div>
+        <p><strong>${element.author}</strong>[${element.date}, ${element.time}]:
+        <i>${element.text}</i></p>
     `;
     })
     .join(" ");
@@ -31,7 +29,6 @@ const addMessage = (event) => {
 
   };
   socket.emit("new-message", message);
-  return false;
 };
 
 const element = document.getElementById("form");

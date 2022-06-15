@@ -19,10 +19,10 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(159, 177, 239, 0.9);
-  padding: 5rem;
+  padding-top: 5rem;
 }
 
-form {
+#productForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,3 +179,61 @@ section a {
 li img {
   width: 150px;
 }
+
+/*messages*/
+.messages {
+  display: flex;
+  flex-direction: column;
+  border: solid #05060f;
+  border-radius: 10px;
+  padding: 1rem 2rem 2rem 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 700px;
+  height: 200px;
+  overflow-y: auto;
+}
+
+#messages p {
+  font-size: 1rem;
+  color: #3b250a;
+  padding-top: 0.3rem;
+}
+
+#messages strong {
+  color: #0a146e;
+  font-weight: bold;
+}
+
+#messages i {
+  color: #185d14;
+  font-style: italic;
+}
+
+.chat {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(159, 177, 239, 0.9);
+  padding-bottom: 2rem;
+}
+
+
+.chat h1 {
+  font-size: clamp(2rem, 2vw, 3rem);
+  text-align: center;
+}
+
+.formChat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  border: solid #05060f;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
