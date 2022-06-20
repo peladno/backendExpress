@@ -1,0 +1,23 @@
+const express = require('express');
+const productsRouter = require('./routes/products/productsRouter');
+const cartRouter = require('./routes/cart/cartRouter')
+
+const app = express();
+
+const PORT = process.env.PORT || 8080;
+
+const server = app.listen(PORT, () => {
+  console.log(`Server http on ${PORT}...`);
+});
+server.on('error', error => console.log("Error on server", error));
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.get("/", (request, resolve) => {
+  resolve.send(
+    "<h1>Eccommerce</h1>"
+  )
+})
+app.use("/api/products", productsRouter);
+app.use("/api/carrito", cartRouter);
