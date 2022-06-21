@@ -6,7 +6,7 @@ const cart = new cartContainer("modulos/cart/cart.json");
 
 router.post("/", (request, resolve) => {
   const newData = request.body;
-  cart.save(newData);
+  cart.createCart(newData);
   resolve.send({ message: "Cart saved" });
 });
 
@@ -23,9 +23,8 @@ router.delete("/:id/products", async (request, resolve) => {
   }
 });
 
-
-router.get("/:id/productos", async (request, resolve) => {
-const { id } = request.params;
+router.get("/:id/products", async (request, resolve) => {
+  const { id } = request.params;
   const idNumber = Number(id);
 
   try {
@@ -39,12 +38,22 @@ const { id } = request.params;
     resolve.status(500);
     resolve.send(error);
   }
-})
-/*
-router.post("/:id/productos", (request, resolve) => {
-//Para incorporar productos al carrito por su id de producto
-})
+});
 
+router.post("/:id/products", async (request, resolve) => {
+  const { id } = request.params;
+  const idNumber = Number(id);
+  const newData = request.body;
+
+  try {
+    await cart.saveCart(newData, idNumber);
+    resolve.send({ message: "Products Saved in cart" });
+  } catch (error) {
+    resolve.status(500);
+    resolve.send(error);
+  }
+});
+/*
 router.delete("/:id/productos/:id_prod", (request, resolve) => {
 //Eliminar un producto del carrito por su id de carrito y de producto
    

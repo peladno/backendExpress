@@ -1,46 +1,10 @@
-[
-  {
-    "products": [
-      {
-        "name": "ipad",
-        "price": 600,
-        "description": "ipad is a tablet computer",
-        "url": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "code": 1,
-        "stock": 15
-      },
-      {
-        "name": "imac",
-        "price": 5220,
-        "description": "ipad is a tablet computer",
-        "url": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "code": 2,
-        "stock": 15
-      }
-    ],
-    "id": 1,
-    "timeStamp": "20-06-2022 02:09:50"
-  },
-  {
-    "products": [
-      {
-        "name": "ipad",
-        "price": 600,
-        "description": "ipad is a tablet computer",
-        "url": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "code": 1,
-        "stock": 15
-      },
-      {
-        "name": "imac",
-        "price": 5220,
-        "description": "ipad is a tablet computer",
-        "url": "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "code": 2,
-        "stock": 15
-      }
-    ],
-    "id": 2,
-    "timeStamp": "20-06-2022 02:12:13"
-  }
-]
+{
+  "products": [
+    {
+      "name": "macccccccccc",
+      "price": 58000
+    }
+  ],
+  "id": 1,
+  "timeStamp": "21-06-2022 02:50:11"
+}

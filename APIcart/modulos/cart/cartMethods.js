@@ -41,17 +41,32 @@ class cartContainer {
     return this.data[this.data.length - 1].id;
   }
 
-  save(obj) {
+  createCart() {
     const actualDate = new Date().toLocaleDateString();
     const actualTime = new Date().toLocaleTimeString();
     const id = this.getLastID();
-    const object = {
-      products: obj,
+    const cart = {
+      products: [],
       id: id + 1,
       timeStamp: `${actualDate} ${actualTime}`,
     };
-    this.data.push(object);
+    this.data.push(cart);
     this.write();
+  }
+
+  async saveCart(obj, id) {
+    try {
+      const allContent = await fs.promises.readFile(this.filename, "utf-8");
+      const cart = JSON.parse(allContent);
+      const cartById = cart.find((i) => i.id === id);
+      cartById.products.push(obj);
+      await fs.promises.writeFile(
+        this.filename,
+        JSON.stringify(cartById, null, 2)
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async deleteById(id) {

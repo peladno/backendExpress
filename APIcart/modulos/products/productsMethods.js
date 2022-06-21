@@ -114,7 +114,7 @@ class Container {
         content[indx].name = product.name;
         content[indx].price = product.price;
         content[indx].description = product.description;
-        content[indx].url = product.url;
+        content[indx].image_url = product.image_url;
         content[indx].code = product.code;
         content[indx].stock = product.stock;
 
