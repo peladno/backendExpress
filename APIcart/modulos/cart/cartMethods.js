@@ -52,17 +52,20 @@ class cartContainer {
     };
     this.data.push(cart);
     this.write();
+    return cart.id;
   }
 
-  async saveCart(obj, id) {
+  async editCart(obj, id) {
     try {
+      obj["id"] = id;
       const allContent = await fs.promises.readFile(this.filename, "utf-8");
-      const cart = JSON.parse(allContent);
-      const cartById = cart.find((i) => i.id === id);
-      cartById.products.push(obj);
+      const content = JSON.parse(allContent);
+
+      let indx = content.findIndex((item) => item.id === obj.id);
+      content.splice(indx, 1, obj);
       await fs.promises.writeFile(
         this.filename,
-        JSON.stringify(cartById, null, 2)
+        JSON.stringify(content, null, 2)
       );
     } catch (error) {
       console.log(error);
@@ -88,6 +91,19 @@ class cartContainer {
       const content = JSON.parse(allContent);
       const contentById = content.find((i) => i.id == id);
       return contentById;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteProduct(idCart, idProd) {
+    try {
+      const cart = this.getByID(idCart);
+      const product = cart.filter((i) => i.id !== idProd);
+      await fs.promises.writeFile(
+        this.filename,
+        JSON.stringify(product, null, 2)
+      );
     } catch (error) {
       console.log(error);
     }
