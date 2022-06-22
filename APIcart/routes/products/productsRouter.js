@@ -4,6 +4,14 @@ const router = Router();
 const Container = require('../../modulos/products/productsMethods');
 const products = new Container('modulos/products/products.json');
 
+function auth(request, resolve, next) {
+  if('admin' in request.headers) next()
+  else {
+      resolve.status(400)
+      resolve.send('No admin')
+  }
+}
+
 router.get("/", async (request, resolve) => {
   try {
     const data = await products.getAll();
@@ -31,7 +39,7 @@ router.get("/:id", async (request, resolve) => {
   }
 });
 
-router.delete("/:id", async (request, resolve) => {
+router.delete("/:id", auth, async (request, resolve) => {
   const { id } = request.params;
   const idNumber = Number(id);
 
@@ -44,14 +52,14 @@ router.delete("/:id", async (request, resolve) => {
   }
 });
 
-router.post("/", (request, resolve) => {
-  const { name, code, description, url, stock, price } = request.body;
-  console.log({ name, code, description, url, stock, price })
-  products.save({ name, code, description, url, stock, price });
-  resolve.send({ Message: "Product saved" });
+router.post("/", auth, (request, resolve) => {
+  const { name, code, description, imageURL, stock, price } = request.body;
+  console.log({ name, code, description, imageURL, stock, price })
+  products.save({ name, code, description, imageURL, stock, price });
+  resolve.send({ Message: "Product saved" })
 });
 
-router.put("/:id", async (request, resolve) => {
+router.put("/:id", auth, async (request, resolve) => {
   try {
     let newData = {};
     newData.name = request.body.name;

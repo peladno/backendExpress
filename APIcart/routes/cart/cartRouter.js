@@ -59,7 +59,7 @@ router.post("/:id/products", async (request, resolve) => {
 });
 
 router.delete("/:id/products/:id_prod", async (request, resolve) => {
-  //Eliminar un producto del carrito por su id de carrito y de producto
+ 
   const { id, id_prod } = request.params;
   const cartID = Number(id);
   const prodID = Number(id_prod);
