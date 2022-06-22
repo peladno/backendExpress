@@ -64,6 +64,7 @@ router.delete("/:id/products/:id_prod", async (request, resolve) => {
   const cartID = Number(id);
   const prodID = Number(id_prod);
 
+
   try {
     const deleteProduct = await cart.deleteProduct(cartID, prodID);
   

@@ -89,7 +89,7 @@ class cartContainer {
     try {
       const allContent = await fs.promises.readFile(this.filename, "utf-8");
       const content = JSON.parse(allContent);
-      const contentById = content.find((i) => i.id == id);
+      const contentById = content.find((i) => i.id === id);
       return contentById;
     } catch (error) {
       console.log(error);
@@ -98,12 +98,17 @@ class cartContainer {
 
   async deleteProduct(idCart, idProd) {
     try {
-      const cart = this.getByID(idCart);
-      const product = cart.filter((i) => i.id !== idProd);
+      const allContent = await fs.promises.readFile(this.filename, "utf-8");
+      const content = JSON.parse(allContent);
+      const contentById = content.find((i) => i.id === idCart);
+      const indx = contentById.products.findIndex((i) => i.id === idProd);
+      contentById.products.splice(indx,1)
       await fs.promises.writeFile(
         this.filename,
-        JSON.stringify(product, null, 2)
+        JSON.stringify(content, null, 2)
       );
+      
+
     } catch (error) {
       console.log(error);
     }

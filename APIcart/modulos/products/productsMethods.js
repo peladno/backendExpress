@@ -55,7 +55,7 @@ class Container {
     try {
       const allContent = await fs.promises.readFile(this.filename, "utf-8");
       const content = JSON.parse(allContent);
-      const contentById = content.find((i) => i.id == id);
+      const contentById = content.find((i) => i.id === id);
       return contentById;
     } catch (error) {
       console.log(error);
