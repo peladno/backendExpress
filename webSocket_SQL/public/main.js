@@ -14,11 +14,7 @@ const render = (data) => {
   document.getElementById("messages").innerHTML = html;
 };
 
-socket.on("messages", (data) => {
-  render(data);
-});
-
-const addMessage = (event) => {
+const addMessage = () => {
   const message = {
     author: document.getElementById("username").value,
     text: document.getElementById("text").value,
@@ -34,6 +30,10 @@ const element = document.getElementById("form");
 element.addEventListener("submit", (event) => {
   event.preventDefault();
   addMessage();
+});
+
+socket.on("messages", (data) => {
+  render(data);
 });
 
 //products
