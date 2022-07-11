@@ -20,12 +20,13 @@ router.get("/", async (request, resolve) => {
 router.post("/", async(request, resolve) => {
   try {
     const cart = []
-    await DAO.cart.save(cart);
+    const saved = await DAO.cart.save(cart);
+    resolve.send({ message: "Cart saved", saved})
   } catch (error) {
     resolve.status(500);
     resolve.send(error);
   }
-  resolve.send({ message: "Cart saved"});
+  
 });
 
 
@@ -34,8 +35,8 @@ router.delete("/:id/products", async (request, resolve) => {
   const id = request.params;
 
   try {
-    await DAO.cart.deleteById(id);
-    resolve.send("Cart deleted");
+     const deleted = await DAO.cart.deleteById(id);
+    resolve.send({message: "Cart deleted", deleted});
   } catch (error) {
     resolve.status(500);
     resolve.send(error);

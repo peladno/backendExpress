@@ -12,6 +12,7 @@ function auth(request, resolve, next) {
   }
 }
 
+//get all products
 router.get("/", async (request, resolve) => {
   try {
     const data = await DAO.products.getAll();
@@ -22,15 +23,17 @@ router.get("/", async (request, resolve) => {
   }
 });
 
+
+//get product by id
 router.get("/:id", async (request, resolve) => {
   const id= request.params;
 
   try {
-    const data = await DAO.products.getByID(idNumber);
+    const data = await DAO.products.getByID(id);
     if (data === undefined) {
-      resolve.send({ error: "product not found" });
+      resolve.send({ error: "product not found", data});
     } else {
-      resolve.send(data);
+      resolve.send({ message: "product found", data });
     }
   } catch (error) {
     resolve.status(500);
@@ -38,32 +41,36 @@ router.get("/:id", async (request, resolve) => {
   }
 });
 
+//delete product by id
 router.delete("/:id", auth, async (request, resolve) => {
   const id = request.params;
-
-
   try {
-    await DAO.products.deleteById(id);
-    resolve.send("Product deleted");
+    const deleted = await DAO.products.deleteById(id);
+    resolve.send({message: "Product deleted", deleted});
   } catch (error) {
     resolve.status(500);
     resolve.send(error);
   }
 });
 
-router.post("/", auth, (request, resolve) => {
-  const { name, code, description, imageURL, stock, price } = request.body;
-  DAO.products.save({ name, code, description, imageURL, stock, price });
-  resolve.send({ Message: "Product saved" })
+//save product
+router.post("/", auth, async (request, resolve) => {
+  try {
+    const { name, code, description, imageURL, stock, price } = request.body;
+  const data = await DAO.products.save({ name, code, description, imageURL, stock, price });
+  resolve.send({ Message: "Product saved", data })
+  } catch (error) {
+    resolve.status(500);
+    resolve.send(error);
+  }
 });
 
 router.put("/:id", auth, async (request, resolve) => {
   try {
     const id  = request.params;
     const newProduct = request.body;
-
-    await DAO.products.updateItems(id, newProduct);
-    resolve.send({ message: `Product updated` });
+    const data = await DAO.products.updateItems(id, newProduct);
+    resolve.send({ message: 'Product updated', data });
   } catch (error) {
     resolve.status(500);
     resolve(error);

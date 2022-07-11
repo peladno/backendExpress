@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const ObjectId = require("mongoose").Types.ObjectId;
+const config = require("../../config");
+const URL = config.mongoLocal.connection;
 
 mongoose
-  .connect("mongodb://localhost/ecommerce")
+  .connect(URL)
   .then(console.log("Base de datos Mongoose conectada"))
   .catch((error) => {
     console.log(`Error: ${error}`);
@@ -31,16 +33,18 @@ class ContainerMongo {
       timeStamp: `${actualDate} ${actualTime}`,
     };
     const newProduct = new this.model(object);
-    await newProduct.save();
+    const Saved = await newProduct.save();
     if (newProduct.error) {
       return { error: newProduct.error };
+    } else {
+      return Saved;
     }
   }
 
   async getByID(id) {
     try {
       const search = await this.model.find({ _id: new ObjectId(id) });
-      if (search.count === 0) {
+      if (search.length === 0) {
         return { error: "product not found" };
       } else {
         return search;
@@ -53,8 +57,10 @@ class ContainerMongo {
   async deleteById(id) {
     try {
       const deleted = await this.model.deleteOne({ _id: new ObjectId(id) });
-      if (deleted.count === 0) {
+      if (deleted.length === 0) {
         return { error: "product not found" };
+      } else {
+        return deleted;
       }
     } catch (err) {
       console.log(err);
@@ -63,8 +69,12 @@ class ContainerMongo {
 
   async deleteAll() {
     try {
-      await this.model.deleteMany({});
-      return { message: "all products deleted" };
+      const deleted = await this.model.deleteMany({});
+      if (deleted.length === 0) {
+        return { error: "product not found" };
+      } else {
+        return deleted;
+      }
     } catch (err) {
       console.log(err);
     }
@@ -76,7 +86,7 @@ class ContainerMongo {
     const newDate = date.toLocaleDateString();
     const timestamp = `${newDate} ${newTime}`;
     try {
-      await this.model.findByIdAndUpdate(
+      const updated = await this.model.findByIdAndUpdate(
         { _id: new ObjectId(id) },
         {
           $push: {
@@ -90,6 +100,7 @@ class ContainerMongo {
           },
         }
       );
+      return updated;
     } catch (err) {
       console.log(err);
     }
@@ -103,9 +114,11 @@ class ContainerMongo {
         products: [],
         timeStamp: `${actualDate} ${actualTime}`,
       });
-      await cart.save();
+      const saved = await cart.save();
       if (cart.error) {
         return { error: cart.error };
+      } else {
+        return saved;
       }
     } catch (error) {
       console.log(error);
@@ -113,10 +126,12 @@ class ContainerMongo {
   }
   async editCart(obj, id) {
     try {
-      await this.model.updateOne(
+      const updated = await this.model.findByIdAndUpdate(
         { _id: new ObjectId(id) },
-        [{ $set: { "products": obj }} ]
+        { $push: { products: obj } },
+        { new: true }
       );
+      return updated;
     } catch (err) {
       console.log(err);
     }
@@ -126,7 +141,7 @@ class ContainerMongo {
     try {
       const searched = await this.model.find({ _id: new ObjectId(idCart) });
 
-      await this.findByIdAndDelete({
+      await searched.findByIdAndDelete({
         _id: new ObjectId(idProduct),
       });
     } catch (err) {

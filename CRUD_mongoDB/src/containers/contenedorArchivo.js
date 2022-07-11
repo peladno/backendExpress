@@ -41,7 +41,7 @@ class ContainerFile {
     return this.data[this.data.length - 1].id;
   }
 
-  save(obj) {
+  async save(obj) {
     const date = new Date();
     const actualDate = date.toLocaleDateString();
     const actualTime = date.toLocaleTimeString();
@@ -52,7 +52,7 @@ class ContainerFile {
       timeStamp: `${actualDate} ${actualTime}`,
     };
     this.data.push(object);
-    this.write();
+    await this.write();
   }
 
   async getAll() {
@@ -78,7 +78,7 @@ class ContainerFile {
     try {
       const content = await this.getAll();
       const product = content.filter((i) => i.id !== id);
-      await this.write(product);
+      return await this.write(product);
     } catch (error) {
       console.log(error);
     }
@@ -114,7 +114,7 @@ class ContainerFile {
         content[indx].code = product.code;
         content[indx].stock = product.stock;
 
-        await this.write(content);
+        return await this.write(content);
       }
     } catch (error) {
       console.log(error);
@@ -123,7 +123,7 @@ class ContainerFile {
 
   //Cart methods
 
-  createCart() {
+  async createCart() {
     const actualDate = new Date().toLocaleDateString();
     const actualTime = new Date().toLocaleTimeString();
     const id = this.getLastID();
@@ -133,7 +133,7 @@ class ContainerFile {
       timeStamp: `${actualDate} ${actualTime}`,
     };
     this.data.push(cart);
-    this.write();
+    await this.write();
     return cart.id;
   }
 
@@ -142,7 +142,7 @@ class ContainerFile {
       const content = await this.getAll();
       const index = content.findIndex(idCart => idCart.id === id);
       content[index].products.push(obj);
-      await this.write(content);
+      return await this.write(content);
     } catch (err) {
       console.log(err);
     }
@@ -154,7 +154,7 @@ class ContainerFile {
       const contentById = content.find((i) => i.id === idCart);
       const indx = contentById.products.findIndex((i) => i.id === idProd);
       contentById.products.splice(indx, 1);
-      await this.write(content);
+      return await this.write(content);
     } catch (error) {
       console.log(error);
     }

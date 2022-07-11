@@ -55,7 +55,7 @@ class ContenedorMemoria {
       content[indx].code = product.code;
       content[indx].stock = product.stock;
 
-      this.saveAll(content);
+      return this.saveAll(content);
     }
   }
 
@@ -64,7 +64,7 @@ class ContenedorMemoria {
   editCart(obj, id) {
     const content = this.getAll();
     const index = content.findIndex((idCart) => idCart.id === id);
-    content[index].products.push(obj);
+    return content[index].products.push(obj);
   }
 
   deleteProduct(idCart, idProd) {
@@ -72,7 +72,7 @@ class ContenedorMemoria {
     const contentById = content.find((i) => i.id === idCart);
     const indx = contentById.products.findIndex((i) => i.id === idProd);
     contentById.products.splice(indx, 1);
-    this.saveAll(content);
+    return this.saveAll(content);
   }
 }
 
