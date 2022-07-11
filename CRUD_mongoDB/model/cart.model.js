@@ -4,7 +4,7 @@ const ProductModel = mongoose.model(
     'cart', 
     new mongoose.Schema({
         products: [{ type: String }],
-        timeStamp: Date
+        timeStamp: {type: String}
     })
 );
  

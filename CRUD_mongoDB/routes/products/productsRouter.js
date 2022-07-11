@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const router = Router();
 
-const Container = require('../../src/containers/contenedorArchivo');
-const products = new Container('DB/products.json');
+const FactoryDao = require('../../src/index');
+const DAO = FactoryDao();
 
 function auth(request, resolve, next) {
   if('admin' in request.headers) next()
@@ -14,7 +14,7 @@ function auth(request, resolve, next) {
 
 router.get("/", async (request, resolve) => {
   try {
-    const data = await products.getAll();
+    const data = await DAO.products.getAll();
     resolve.send(data);
   } catch (error) {
     resolve.status(500);
@@ -23,11 +23,10 @@ router.get("/", async (request, resolve) => {
 });
 
 router.get("/:id", async (request, resolve) => {
-  const { id } = request.params;
-  const idNumber = Number(id);
+  const id= request.params;
 
   try {
-    const data = await products.getByID(idNumber);
+    const data = await DAO.products.getByID(idNumber);
     if (data === undefined) {
       resolve.send({ error: "product not found" });
     } else {
@@ -40,11 +39,11 @@ router.get("/:id", async (request, resolve) => {
 });
 
 router.delete("/:id", auth, async (request, resolve) => {
-  const { id } = request.params;
-  const idNumber = Number(id);
+  const id = request.params;
+
 
   try {
-    await products.deleteById(idNumber);
+    await DAO.products.deleteById(id);
     resolve.send("Product deleted");
   } catch (error) {
     resolve.status(500);
@@ -54,23 +53,17 @@ router.delete("/:id", auth, async (request, resolve) => {
 
 router.post("/", auth, (request, resolve) => {
   const { name, code, description, imageURL, stock, price } = request.body;
-  products.save({ name, code, description, imageURL, stock, price });
+  DAO.products.save({ name, code, description, imageURL, stock, price });
   resolve.send({ Message: "Product saved" })
 });
 
 router.put("/:id", auth, async (request, resolve) => {
   try {
-    let newData = {};
-    newData.name = request.body.name;
-    newData.price = request.body.price;
-    newData.description = request.body.description;
-    newData.image_url = request.body.image_url;
-    newData.code = request.body.code;
-    newData.stock = request.body.stock;
-    newData.id = parseInt(request.params.id);
+    const id  = request.params;
+    const newProduct = request.body;
 
-    await products.updateItems(newData);
-    resolve.send({ message: `Product with id: ${newData.id} updated` });
+    await DAO.products.updateItems(id, newProduct);
+    resolve.send({ message: `Product updated` });
   } catch (error) {
     resolve.status(500);
     resolve(error);
@@ -78,4 +71,3 @@ router.put("/:id", auth, async (request, resolve) => {
 });
 
 module.exports = router;
-console.log({ name, code, description, imageURL, stock, price })

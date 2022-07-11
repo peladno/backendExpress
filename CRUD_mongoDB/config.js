@@ -1,7 +1,7 @@
-module.export ={
-    PORT: process.env.PORT || 8080,
-    mongoLocal: {
-        client: mongodb,
-        connectionString: 'mongodb://localhost:27017/ecommerce'
-}
-}
+module.export = {
+  PORT: process.env.PORT || 8080,
+  mongoLocal: {
+    client: 'mongodb',
+    connection: 'mongodb://127.0.0.1:27017/ecommerce',
+  },
+};

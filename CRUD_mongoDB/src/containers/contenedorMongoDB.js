@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
-const config = require("../../config");
-const URL = config.mongoLocal.connectionString;
+const ObjectId = require("mongoose").Types.ObjectId;
 
-mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose
+  .connect("mongodb://localhost/ecommerce")
+  .then(console.log("Base de datos Mongoose conectada"))
+  .catch((error) => {
+    console.log(`Error: ${error}`);
+  });
 
 class ContainerMongo {
   constructor(model) {
@@ -11,8 +15,8 @@ class ContainerMongo {
 
   async getAll() {
     try {
-        const searched = await this.model.find();
-      return searched
+      const searched = await this.model.find();
+      return searched;
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +39,7 @@ class ContainerMongo {
 
   async getByID(id) {
     try {
-      const search = await this.model.find({ _id: { $eq: id } });
+      const search = await this.model.find({ _id: new ObjectId(id) });
       if (search.count === 0) {
         return { error: "product not found" };
       } else {
@@ -48,7 +52,7 @@ class ContainerMongo {
 
   async deleteById(id) {
     try {
-      const deleted = await this.model.deleteOne({ _id: { $eq: id } });
+      const deleted = await this.model.deleteOne({ _id: new ObjectId(id) });
       if (deleted.count === 0) {
         return { error: "product not found" };
       }
@@ -66,27 +70,26 @@ class ContainerMongo {
     }
   }
 
-  async updateItems(product) {
+  async updateItems(id, product) {
+    const date = new Date();
+    const newTime = date.toLocaleTimeString();
+    const newDate = date.toLocaleDateString();
+    const timestamp = `${newDate} ${newTime}`;
     try {
-      const searched = await this.model.find({ _id: { $eq: product._id } });
-      if (searched.count() === 0) {
-        return { error: "product not found" };
-      } else {
-        await searched.updateOne(
-          { _id: { $eq: product._id } },
-          {
-            $set: {
-              name: product.name,
-              price: product.price,
-              description: product.description,
-              image_url: product.image_url,
-              code: product.code,
-              stock: product.stock,
-            },
-          }
-        );
-        return { message: `product ${searched} updated` };
-      }
+      await this.model.findByIdAndUpdate(
+        { _id: new ObjectId(id) },
+        {
+          $push: {
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            image_url: product.image_url,
+            code: product.code,
+            stock: product.stock,
+            timeStamp: timestamp,
+          },
+        }
+      );
     } catch (err) {
       console.log(err);
     }
@@ -108,51 +111,28 @@ class ContainerMongo {
       console.log(error);
     }
   }
-
   async editCart(obj, id) {
     try {
-      const searched = await this.model.find({ _id: { $eq: id } });
-      if (searched.count() === 0) {
-        return { error: "cart not found" };
-      } else {
-        await searched.updateOne(
-          { _id: { $eq: id } },
-          {
-            $push: {
-              products: obj,
-            },
-          }
-        );
-        return { message: `cart ${searched} updated` };
-      }
-    } catch {}
+      await this.model.updateOne(
+        { _id: new ObjectId(id) },
+        [{ $set: { "products": obj }} ]
+      );
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  /*async editCart(obj, id) {
+  async deleteProduct(idCart, idProduct) {
     try {
-        this.model.findOneAndUpdate({ _id: { $eq: id } }, { $push: { products: obj } });
-      } catch(err) {
-        console.log(err);
-      }
-    }*/
+      const searched = await this.model.find({ _id: new ObjectId(idCart) });
 
-    async deleteProduct(idCart, idProduct) {
-        try {
-            const searched = await this.model.find({ _id: { $eq: idCart } });
-            if (searched.count() === 0) {
-                return { error: "cart not found" };
-            } else {
-                const searchProduct = await searched.findOneAndDelete(idProduct);
-                if (searchProduct.count === 0) {
-                    return { error: "product not found" };
-                } else {
-                    return { message: `product ${searchProduct} deleted` };
-                }
-            }
-        } catch {
-
-        }
+      await this.findByIdAndDelete({
+        _id: new ObjectId(idProduct),
+      });
+    } catch (err) {
+      console.log(err);
     }
+  }
 }
 
 module.exports = ContainerMongo;

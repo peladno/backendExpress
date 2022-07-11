@@ -1,6 +1,4 @@
-const hola = [];
-
-class Container {
+class ContenedorMemoria {
   constructor() {
     this.data = [];
   }
@@ -62,20 +60,6 @@ class Container {
   }
 
   //Cart methods
-  createCart() {
-    const actualDate = new Date().toLocaleDateString();
-    const actualTime = new Date().toLocaleTimeString();
-    const id = this.getLastID();
-
-    const cart = {
-      products: [],
-      id: id + 1,
-      timeStamp: `${actualDate} ${actualTime}`,
-    };
-    this.data.push(cart);
-
-    return cart.id;
-  }
 
   editCart(obj, id) {
     const content = this.getAll();
@@ -91,3 +75,5 @@ class Container {
     this.saveAll(content);
   }
 }
+
+module.exports = ContenedorMemoria;
