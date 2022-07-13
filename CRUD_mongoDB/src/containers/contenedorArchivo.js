@@ -4,7 +4,6 @@ class ContainerFile {
   constructor(filename) {
     this.filename = filename;
     this.data = [];
-
     try {
       this.read();
     } catch (error) {
@@ -41,7 +40,7 @@ class ContainerFile {
     return this.data[this.data.length - 1].id;
   }
 
-  async save(obj) {
+  save(obj) {
     const date = new Date();
     const actualDate = date.toLocaleDateString();
     const actualTime = date.toLocaleTimeString();
@@ -52,12 +51,14 @@ class ContainerFile {
       timeStamp: `${actualDate} ${actualTime}`,
     };
     this.data.push(object);
-    await this.write();
+    this.write();
+    return object;
   }
 
   async getAll() {
     try {
-      const content = await this.getAll();
+      const allContent = await fs.promises.readFile(this.filename, "utf-8");
+      const content = JSON.parse(allContent);
       return content;
     } catch (error) {
       console.log(error);
@@ -87,16 +88,6 @@ class ContainerFile {
   deleteAll() {
     this.data = [];
     this.write();
-  }
-
-  async randomItems() {
-    try {
-      const content = await this.getAll();
-      const shuffled = [...content].sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, 1);
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   async updateItems(product) {
@@ -140,7 +131,7 @@ class ContainerFile {
   async editCart(obj, id) {
     try {
       const content = await this.getAll();
-      const index = content.findIndex(idCart => idCart.id === id);
+      const index = content.findIndex((idCart) => idCart.id === id);
       content[index].products.push(obj);
       return await this.write(content);
     } catch (err) {

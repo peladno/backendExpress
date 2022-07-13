@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "name": "feli",
+    "code": "123456",
+    "description": "Hola",
+    "imageURL": "hola",
+    "stock": 1,
+    "price": 123456,
+    "id": 1,
+    "timeStamp": "12/7/2022 21:18:46"
+  }
+]

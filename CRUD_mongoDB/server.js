@@ -1,12 +1,12 @@
 const express = require("express");
 const cors = require("cors");
+const config = require("./config");
 
 const productsRouter = require("./routes/products/productsRouter");
 const cartRouter = require("./routes/cart/cartRouter");
 
 const app = express();
-
-const PORT = process.env.PORT || 8080;
+const PORT = config.PORT;
 
 const server = app.listen(PORT, () => {
   console.log(`Server http on ${PORT}...`);

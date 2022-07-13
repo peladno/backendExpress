@@ -139,11 +139,12 @@ class ContainerMongo {
 
   async deleteProduct(idCart, idProduct) {
     try {
-      const searched = await this.model.find({ _id: new ObjectId(idCart) });
-
-      await searched.findByIdAndDelete({
-        _id: new ObjectId(idProduct),
-      });
+      const updated = await this.model.updateOne(
+        { _id: new ObjectId(idCart) },
+        { $pull: { products: { _id: idProduct } } },
+        { new: true }
+      );
+      return updated;
     } catch (err) {
       console.log(err);
     }
