@@ -49,8 +49,8 @@ io.on("connection", async (socket) => {
   //messages
   const messages = await messagesContainer.getAll();
   socket.emit("messages", messages);
-  socket.on("new-message", (data) => {
-   messagesContainer.save(data);
+  socket.on("new-message", async (data) => {
+   await messagesContainer.save(data);
     io.sockets.emit("messages", messages);
   });
 });

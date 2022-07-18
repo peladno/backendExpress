@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+  <script defer src="main.js"></script>
+  <title>Form</title>
+</head>
+
+<body>
+  <main>
+    <section class="mainForm">
+      <form id="productForm">
+        <div class="input-group">
+          <label class="label">Item</label>
+          <input autocomplete="off" name="item" class="input" type="text" id="item" />
+          <div></div>
+        </div>
+        <div class="input-group">
+          <label class="label">Price</label>
+          <input autocomplete="off" name="price" class="input" type="text" id="price" />
+          <div></div>
+        </div>
+        <div class="input-group">
+          <label class="label">Url</label>
+          <input autocomplete="off" name="url" class="input" type="text" id="url" />
+          <div></div>
+        </div>
+        <button type="submit" id="productButton">
+          <div class="svg-wrapper-1">
+            <div class="svg-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path fill="currentColor"
+                  d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
+                </path>
+              </svg>
+            </div>
+          </div>
+          <span>Send</span>
+        </button>
+      </form>
+      <section>
+        <div id="products"></div>
+      </section>
+    </section>
+    <section class="chat">
+      <h1>Mi App chat</h1>
+      <div class="messages" id="messages"></div>
+      <form id="form" class="formChat">
+        <input type="text" name="name" id="name" placeholder="Nombre" />
+        <input type="email" name="email" id="email" placeholder="Email" />
+        <input type="number" name="age" id="age" placeholder="edad" />
+        <input type="text" name="avatar" id="avatar" placeholder="Avatar" />
+        <input type="text" name="text" id="text" placeholder="Cuentanos algo..." />
+        <input id="send" type="submit" value="Enviar" />
+      </form>
+    </section>
+  </main>
+</body>
+
+</html>

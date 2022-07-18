@@ -8,8 +8,7 @@ class ContenedorMemoria {
   }
 
   getByID(id) {
-    const idNumber = Number(id);
-    return this.data.find((i) => i.id === idNumber);
+    return this.data.find((i) => i.id === Number(id));
   }
 
   getLastID() {
@@ -33,7 +32,7 @@ class ContenedorMemoria {
   }
 
   deletebyId(id) {
-    const content = this.data.findIndex((i) => i.id === id);
+    const content = this.data.findIndex((i) => i.id === Number(id));
     this.data.splice(content, 1);
     return this.data;
   }
@@ -42,11 +41,11 @@ class ContenedorMemoria {
     this.data = [];
   }
 
-  updateItems(product) {
+  updateItems(id, product) {
     const content = this.getAll();
-    let indx = this.data.findIndex((i) => i.id === product.id);
+    let indx = this.data.findIndex((i) => i.id === Number(id));
     if (indx == -1) {
-      return { error };
+      return { error: "Product no found" };
     } else {
       content[indx].name = product.name;
       content[indx].price = product.price;
@@ -55,7 +54,7 @@ class ContenedorMemoria {
       content[indx].code = product.code;
       content[indx].stock = product.stock;
 
-      return this.saveAll(content);
+      return content;
     }
   }
 
@@ -63,16 +62,15 @@ class ContenedorMemoria {
 
   editCart(obj, id) {
     const content = this.getAll();
-    const index = content.findIndex((idCart) => idCart.id === id);
+    const index = content.findIndex((idCart) => idCart.id === Number(id));
     return content[index].products.push(obj);
   }
 
   deleteProduct(idCart, idProd) {
     const content = this.getAll();
-    const contentById = content.find((i) => i.id === idCart);
-    const indx = contentById.products.findIndex((i) => i.id === idProd);
-    contentById.products.splice(indx, 1);
-    return this.saveAll(content);
+    const contentById = content.find((i) => i.id === Number(idCart));
+    const indx = contentById.products.findIndex((i) => i.id === Number(idProd));
+    return contentById.products.splice(indx, 1);
   }
 }
 

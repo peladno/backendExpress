@@ -68,7 +68,7 @@ class ContainerFile {
   async getByID(id) {
     try {
       const content = await this.getAll();
-      const contentById = content.find((i) => i.id === id);
+      const contentById = content.find((i) => i.id === Number(id));
       return contentById;
     } catch (error) {
       console.log(error);
@@ -78,8 +78,8 @@ class ContainerFile {
   async deleteById(id) {
     try {
       const content = await this.getAll();
-      const product = content.filter((i) => i.id !== id);
-      return await this.write(product);
+      const product = content.filter((i) => i.id !== Number(id));
+      fs.promises.writeFile(this.filename, JSON.stringify(product, null, 2));
     } catch (error) {
       console.log(error);
     }
@@ -90,13 +90,13 @@ class ContainerFile {
     this.write();
   }
 
-  async updateItems(product) {
+  async updateItems(id, product) {
     try {
       const content = await this.getAll();
 
-      let indx = content.findIndex((item) => item.id === product.id);
+      let indx = content.findIndex((item) => item.id === Number(id));
       if (indx == -1) {
-        return { error };
+        return { error: "Product no found" };
       } else {
         content[indx].name = product.name;
         content[indx].price = product.price;
@@ -104,8 +104,11 @@ class ContainerFile {
         content[indx].image_url = product.image_url;
         content[indx].code = product.code;
         content[indx].stock = product.stock;
-
-        return await this.write(content);
+        await fs.promises.writeFile(
+          this.filename,
+          JSON.stringify(content, null, 2)
+        );
+        return content;
       }
     } catch (error) {
       console.log(error);
@@ -131,9 +134,12 @@ class ContainerFile {
   async editCart(obj, id) {
     try {
       const content = await this.getAll();
-      const index = content.findIndex((idCart) => idCart.id === id);
+      const index = content.findIndex((idCart) => idCart.id === Number(id));
       content[index].products.push(obj);
-      return await this.write(content);
+      await fs.promises.writeFile(
+        this.filename,
+        JSON.stringify(content, null, 2)
+      );
     } catch (err) {
       console.log(err);
     }
@@ -142,10 +148,15 @@ class ContainerFile {
   async deleteProduct(idCart, idProd) {
     try {
       const content = await this.getAll();
-      const contentById = content.find((i) => i.id === idCart);
-      const indx = contentById.products.findIndex((i) => i.id === idProd);
+      const contentById = content.find((i) => i.id === Number(idCart));
+      const indx = contentById.products.findIndex(
+        (i) => i.id === Number(idProd)
+      );
       contentById.products.splice(indx, 1);
-      return await this.write(content);
+      await fs.promises.writeFile(
+        this.filename,
+        JSON.stringify(content, null, 2)
+      );
     } catch (error) {
       console.log(error);
     }
