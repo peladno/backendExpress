@@ -1,7 +1,6 @@
 const express = require("express");
 const { Server } = require("socket.io");
 const http = require("http");
-const Container = require("./modules/products/productsMethods");
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -54,9 +53,10 @@ const schemaAllMessages = new schema.Entity(
     idAttribute: "id",
   }
 );
-
+const Container = require("./modules/products/productsMethods");
 const messagesJson = new Container("./modules/messages/messages.json");
 const productsJson = new Container("./modules/products/file.json");
+
 
 app.get("/", async (request, resolve) => {
   const messages = await messagesJson.getAll();
@@ -79,7 +79,7 @@ io.on("connection", async (socket) => {
 
   //messages
   const messages = await messagesJson.getAll();
-  const normalizedMessages = normalize(messages, schemaAllMessages);
+  const normalizedMessages = normalize(messages, [schemaAllMessages]);
   socket.emit("messages", normalizedMessages);
 
   function print(obj) {
@@ -88,11 +88,7 @@ io.on("connection", async (socket) => {
   socket.on("new-message", async (data) => {
     messagesJson.save(data);
     const messages = await messagesJson.getAll();
-    const messagesId = {
-			id: "messages",
-			allMessages: [messages]
-		}
-    const normalizedMessages = normalize(messagesId, schemaAllMessages);
+    const normalizedMessages = normalize(messages, [schemaAllMessages]);
     io.sockets.emit("messages", normalizedMessages);
 
     print(normalizedMessages);

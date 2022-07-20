@@ -2,7 +2,6 @@ const socket = io.connect();
 const denormalize = normalizr.denormalize;
 const schema = normalizr.schema;
 
-
 const schemaAuthor = new schema.Entity(
   "author",
   {},
@@ -31,7 +30,7 @@ const schemaAllMessages = new schema.Entity(
 
 //Messages
 
-/*const render = (data) => {
+const render = (data) => {
   const html = data
     .map((element) => {
       return `
@@ -40,19 +39,23 @@ const schemaAllMessages = new schema.Entity(
     })
     .join(" ");
   document.getElementById("messages").innerHTML = html;
-};*/
-
-
+};
 
 socket.on("messages", (data) => {
   const denormalizedData = denormalize(
     data.result,
-    schemaAllMessages,
+    [schemaAllMessages],
     data.entities
   );
 
-  console.log(denormalizedData);
-  //render(denormalizedData.);
+  const sizeNormalized = JSON.stringify(data).length;
+  const sizeDenormalizr = JSON.stringify(denormalizedData).length;
+
+  const compresion = parseInt((sizeNormalized * 100) / sizeDenormalizr);
+
+   console.log(data);
+   console.log("compresion", compresion + "%");
+  render(denormalizedData);
 });
 
 const addMessage = (event) => {
