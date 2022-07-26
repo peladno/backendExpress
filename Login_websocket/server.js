@@ -66,7 +66,7 @@ app.use(
   session({
     store: MongoStore.create({
       mongoUrl:
-        "mongodb+srv://peladno:Musicman90@coderhouseproject.zgltv4f.mongodb.net/?retryWrites=true&w=majority",
+        "mongodb+srv://xxx:xxx@coderhouseproject.zgltv4f.mongodb.net/?retryWrites=true&w=majority",
     }),
     secret: "secret",
     resave: true,
