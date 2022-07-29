@@ -12,6 +12,7 @@ const io = new Server(httpServer);
 const loginRouter = require("./src/routers/user");
 const webRouter = require("./src/routers/web");
 
+
 const PORT = process.env.PORT || 8080;
 
 httpServer.listen(PORT, () => {
@@ -23,6 +24,7 @@ httpServer.on("error", (error) => console.log("Error on server", error));
 app.use("/", express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.set("views", "./public/views");
+app.use(express.urlencoded({ extended: true }));
 
 ////////////////////////////////End config/////////////////////////////////////
 
@@ -66,7 +68,7 @@ app.use(
   session({
     store: MongoStore.create({
       mongoUrl:
-        "mongodb+srv://xxx:xxx@coderhouseproject.zgltv4f.mongodb.net/?retryWrites=true&w=majority",
+        "mongodb+srv://peladno:stingrayelo90@coderhouseproject.zgltv4f.mongodb.net/?retryWrites=true&w=majority",
     }),
     secret: "secret",
     resave: true,

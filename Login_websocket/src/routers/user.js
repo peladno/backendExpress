@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const path = require("path");
 
 router.get("/", (req, res) => {
   res.redirect("/home");
@@ -8,24 +7,20 @@ router.get("/", (req, res) => {
 
 router.get("/login", (req, res) => {
   const user = req.session?.user;
-  
   if (user) {
     res.redirect("/");
   } else {
-    res.sendFile(path.join(process.cwd(),"/public/index.html"));
+    res.status(401).render("index")
   }
 });
 
 router.get("/logout", (req, res) => {
   const user = req.session?.user;
-  
+
   if (user) {
     req.session.destroy((err) => {
       if (!err) {
-        res.render(path.join(process.cwd(), "/public/views/pages/logout.ejs"), {user});
-        setTimeout(() => {
-          location.href = '/'
-      }, 2000)
+        res.render("logout",{user});
       } else {
         res.redirect("/");
       }
@@ -36,7 +31,7 @@ router.get("/logout", (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  req.session.user = req.body.name;
+  req.session.user = req.body.user;
   res.redirect('/home')
 })
 module.exports = router;
