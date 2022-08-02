@@ -1,0 +1,239 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+/*form*/
+
+.mainForm {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(159, 177, 239, 0.9);
+  padding-top: 5rem;
+}
+
+#productForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  border: solid #05060f;
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.input {
+  height: 44px;
+  background-color: #05060f0a;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+.input-group {
+  margin-top: 1rem;
+}
+.label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #05060f99;
+  transition: color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.input:hover,
+.input:focus,
+.input-group:hover .input {
+  outline: none;
+  border-color: #05060f;
+}
+
+.input-group:hover .label,
+.input:focus {
+  color: #05060fc2;
+}
+
+/*button form */
+button {
+  font-family: inherit;
+  font-size: 20px;
+  background: royalblue;
+  color: white;
+  padding: 0.5em 0.8em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+button span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+button svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+button:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+button:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+button:hover span {
+  transform: translateX(5em);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
+.linkProducts {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.linkProducts a {
+  text-decoration: none;
+}
+
+/*Product list*/
+
+.sectionProduct h1 {
+  font-size: clamp(2rem, 2vw, 3rem);
+  text-align: center;
+}
+
+.sectionProduct {
+  width: 700px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: solid #05060f;
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+section a {
+  text-decoration: none;
+  text-align: right;
+  display: block;
+}
+
+.mainForm ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  margin: 2rem;
+}
+
+.mainForm li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  color: #05060f99;
+}
+
+li img {
+  width: 150px;
+}
+
+/*messages*/
+.messages {
+  display: flex;
+  flex-direction: column;
+  border: solid #05060f;
+  border-radius: 10px;
+  padding: 1rem 2rem 2rem 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 700px;
+  height: 200px;
+  overflow-y: auto;
+}
+
+#messages p {
+  font-size: 1rem;
+  color: #3b250a;
+  padding-top: 0.3rem;
+}
+
+#messages strong {
+  color: #0a146e;
+  font-weight: bold;
+}
+
+#messages i {
+  color: #185d14;
+  font-style: italic;
+}
+
+.chat {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(159, 177, 239, 0.9);
+  padding-bottom: 2rem;
+}
+
+
+.chat h1 {
+  font-size: clamp(2rem, 2vw, 3rem);
+  text-align: center;
+}
+
+.formChat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  border: solid #05060f;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
