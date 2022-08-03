@@ -8,12 +8,15 @@
 </head>
 <body>
    <main>
-    <form action="/login" method="post">
+    <form action="/signup" method="post">
         <label>Nombre</label>
-        <input type="text" name="user" placeholder="Nombre">
+        <input type="text" name="user" placeholder="User">
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="password" placeholder="Password">
         <button type="submit">Entrar</button>
     </form>
    </main>
+   <input type="button" onclick="location.href='/login'" value="Login">
 
 </body>
 </html>

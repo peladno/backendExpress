@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const ObjectId = require("mongoose").Types.ObjectId;
 const config = require("./config");
 const URL = config.mongoLocal.connection;
 
@@ -41,11 +40,11 @@ class ContainerMongo {
     }
   }
 
-  async getByID(id) {
+  async getByID(username) {
     try {
-      const search = await this.model.find({ _id: new ObjectId(id) });
+      const search = await this.model.findOne({username});
       if (search.length === 0) {
-        return { error: "product not found" };
+        return { error: "user not found" };
       } else {
         return search;
       }
@@ -54,3 +53,5 @@ class ContainerMongo {
     }
   }
 }
+
+module.exports = ContainerMongo;

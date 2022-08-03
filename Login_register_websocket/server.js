@@ -1,19 +1,19 @@
 const express = require("express");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const http = require("http");
-
-//websocket
-const { Server } = require("socket.io");
+const passport = require("passport");
+const config = require("./config")
 
 const app = express();
 const httpServer = http.createServer(app);
 const io = new Server(httpServer);
-const loginRouter = require("./src/routers/user");
-const webRouter = require("./src/routers/web");
+const userRouter = require("./src/routers/user");
 
+//websocket
+const { Server } = require("socket.io");
 
-const PORT = process.env.PORT || 8080;
+//server
+const PORT = config.PORT;
 
 httpServer.listen(PORT, () => {
   console.log(`Server http on ${PORT}...`);
@@ -24,7 +24,10 @@ httpServer.on("error", (error) => console.log("Error on server", error));
 app.use("/", express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.set("views", "./public/views");
+
+//config
 app.use(express.urlencoded({ extended: true }));
+
 
 ////////////////////////////////End config/////////////////////////////////////
 
@@ -36,10 +39,7 @@ const Container = require("./contenedores/productsFile");
 const messagesJson = new Container("./DB/messages/messages.json");
 const productsJson = new Container("./DB/products/file.json");
 
-app.get("/products", async (request, resolve) => {
-  const products = await productsJson.getAll();
-  resolve.render("productsList", { products });
-});
+//websocket
 
 io.on("connection", async (socket) => {
   //products
@@ -63,22 +63,25 @@ io.on("connection", async (socket) => {
   });
 });
 
-//mongo-session
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://xxxx:xxxx@coderhouseproject.zgltv4f.mongodb.net/?retryWrites=true&w=majority",
-    }),
-    secret: "secret",
-    resave: true,
-    saveUninitialized: false,
-    rolling: true
-  })
-);
+//session
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  rolling: true,
+  cookie: {
+      maxAge: 30000,
+      secure: false,
+      httpOnly: true
+  }
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 //routes
-app.use("", loginRouter);
-app.use("", webRouter);
+app.get("/products", async (request, resolve) => {
+  const products = await productsJson.getAll();
+  resolve.render("productsList", { products });
+});
+app.use("", userRouter);
 
-//TODO conectar con rutas y passport

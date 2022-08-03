@@ -1,15 +1,12 @@
-  <body>
-    <main class="mainProducts">
-      <section class="sectionProduct">
-        <h1>Lista de productos</h1>
-        <ul>
-          <% products.forEach(product=> { %>
-          <li><%= product.item %></li>
-          <li><%= product.price %></li>
-          <li><img src="<%= product.url %>" /></li>
-          <% }); %>
-        </ul>
-      </section>
-    </main>
-  </body>
-</html>
+<div class="mainProducts">
+  <div class="sectionProduct">
+    <h1>Lista de productos</h1>
+    <ul>
+      <% products.forEach(product=> { %>
+      <li><%= product.item %></li>
+      <li><%= product.price %></li>
+      <li><img src="<%= product.url %>" /></li>
+      <% }); %>
+    </ul>
+  </div>
+</div>
