@@ -6,11 +6,11 @@ const config = require("./config")
 
 const app = express();
 const httpServer = http.createServer(app);
-const io = new Server(httpServer);
 const userRouter = require("./src/routers/user");
 
 //websocket
 const { Server } = require("socket.io");
+const io = new Server(httpServer);
 
 //server
 const PORT = config.PORT;

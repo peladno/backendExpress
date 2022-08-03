@@ -7,7 +7,7 @@ module.exports  = mongoose.model(
       type: String,
       required: true,
     },
-    user: {
+    username: {
       type: String,
       required: true,
     },

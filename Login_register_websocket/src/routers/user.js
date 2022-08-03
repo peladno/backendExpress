@@ -11,8 +11,10 @@ const DAO = new mongoDAO();
 
 //Password encrypted
 
-const hashPassword = (password) => {
-  const hash = bcrypt.hashSync(password,(err, hash) => {
+const rounds = 10;
+
+const hashPassword = (password, rounds) => {
+  const hash = bcrypt.hashSync(password, rounds,(err, hash) => {
     if (err) {
       console.error(err);
       return err;
@@ -66,7 +68,7 @@ passport.use(
     let newUser;
     try {
       newUser = await DAO.getByID(username);
-    } catch {
+    } catch(err) {
       throw done(err);
     }
     if (newUser) {
@@ -76,7 +78,7 @@ passport.use(
     try {
       newUser = { username, password: hash, name: req.body.name };
       await DAO.save(newUser);
-    } catch {
+    } catch(err) {
       throw done(err);
     }
     return done(null, newUser);
@@ -90,8 +92,8 @@ passport.serializeUser((username, done) => {
 passport.deserializeUser(async (name, done) => {
   let user;
   try {
-    user = await userDAO.getByID(name);
-  } catch (err) {
+    user = await DAO.getByID(name);
+  } catch(err) {
     throw done(err);
   }
   done(null, user);

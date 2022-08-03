@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const config = require("./config");
+const config = require("../config");
 const URL = config.mongoLocal.connection;
 
 mongoose
@@ -15,19 +15,23 @@ class ContainerMongo {
   }
 
   async save(obj) {
-    const date = new Date();
-    const actualDate = date.toLocaleDateString();
-    const actualTime = date.toLocaleTimeString();
-    const object = {
-      ...obj,
-      timeStamp: `${actualDate} ${actualTime}`,
-    };
-    const newProduct = new this.model(object);
-    const Saved = await newProduct.save();
-    if (newProduct.error) {
-      return { error: newProduct.error };
-    } else {
-      return Saved;
+    try {
+      const date = new Date();
+      const actualDate = date.toLocaleDateString();
+      const actualTime = date.toLocaleTimeString();
+      const object = {
+        ...obj,
+        timeStamp: `${actualDate} ${actualTime}`,
+      };
+      const newProduct = new this.model(object);
+      const Saved = await newProduct.save();
+      if (newProduct.error) {
+        return { error: newProduct.error };
+      } else {
+        return Saved;
+      }
+    } catch (err) {
+      throw err;
     }
   }
 
@@ -36,20 +40,20 @@ class ContainerMongo {
       const searched = await this.model.find();
       return searched;
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   }
 
   async getByID(username) {
     try {
       const search = await this.model.findOne({username});
-      if (search.length === 0) {
+      if (search = undefined) {
         return { error: "user not found" };
       } else {
         return search;
       }
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   }
 }
