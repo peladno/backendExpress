@@ -2,7 +2,9 @@ const express = require("express");
 const session = require("express-session");
 const http = require("http");
 const passport = require("passport");
-const config = require("./config")
+const mongoose = require("mongoose");
+const config = require("./config");
+const URL = config.mongoLocal.connection;
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -20,6 +22,15 @@ httpServer.listen(PORT, () => {
 });
 httpServer.on("error", (error) => console.log("Error on server", error));
 
+//mongo
+const MongoStore = require('connect-mongo')
+mongoose
+  .connect(URL)
+  .then(console.log("Base de datos Mongoose conectada"))
+  .catch((error) => {
+    console.log(`Error: ${error}`);
+  });
+
 //directories
 app.use("/", express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
@@ -27,7 +38,6 @@ app.set("views", "./public/views");
 
 //config
 app.use(express.urlencoded({ extended: true }));
-
 
 ////////////////////////////////End config/////////////////////////////////////
 
@@ -64,17 +74,22 @@ io.on("connection", async (socket) => {
 });
 
 //session
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false,
-  rolling: true,
-  cookie: {
-      maxAge: 30000,
+app.use(
+  session({
+    store: new MongoStore({
+      mongoUrl: "mongodb://localhost:27017/sessions",
+    }),
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+      maxAge: 1000000,
       secure: false,
-      httpOnly: true
-  }
-}))
+      httpOnly: true,
+    },
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -84,4 +99,3 @@ app.get("/products", async (request, resolve) => {
   resolve.render("productsList", { products });
 });
 app.use("", userRouter);
-
