@@ -1,0 +1,20 @@
+[
+  {
+    "item": "imac",
+    "price": "500000",
+    "url": "https://cdn2.iconfinder.com/data/icons/apple-product-icons/256/apple-product-2015-imac.png",
+    "id": 1
+  },
+  {
+    "item": "Ipad",
+    "price": "50000",
+    "url": "https://cdn2.iconfinder.com/data/icons/apple-product-icons/256/apple-product-2015-ipad-Space-Gray.png",
+    "id": 2
+  },
+  {
+    "item": "",
+    "price": "",
+    "url": "",
+    "id": 3
+  }
+]
