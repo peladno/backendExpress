@@ -29,20 +29,13 @@ const mode = args.mode.toUpperCase();
 const { Server } = require("socket.io");
 const io = new Server(httpServer);
 
-//server
-
-httpServer.listen(PORT, () => {
-  console.log(`Server http on ${PORT}...`);
-});
-httpServer.on("error", (error) => console.log("Error on server", error));
-
 //mongo
 const MongoStore = require("connect-mongo");
 mongoose
   .connect(URL)
   .then(console.log("Base de datos Mongoose conectada"))
   .catch((error) => {
-    console.log(`Error: ${error}`);
+    logger.error(`mongoose error ${error}`);
   });
 
 //directories
@@ -107,11 +100,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//logger 
-app.use((req,res, next) => {
-	logger.info(`Ruta: ${req.path}, Método: ${req.method}`)
-	next()
-})
+//logger
+app.use((req, res, next) => {
+  logger.info(`Ruta: ${req.path}, Método: ${req.method}`);
+  next();
+});
 
 //routes
 app.get("/products", async (request, resolve) => {
@@ -149,7 +142,7 @@ if (mode === "CLUSTER") {
         }, mode: ${mode} - PID: ${process.pid}`
       );
     });
-    connectedServer.on("error", (error) => console.log(`Error: ${error}`));
+    connectedServer.on("error", (error) => logger.error(`error ${error}`));
   }
 } else {
   //fork default mode
@@ -160,7 +153,7 @@ if (mode === "CLUSTER") {
       }, mode: ${mode} - PID: ${process.pid}`
     );
   });
-  connectedServer.on("error", (error) => console.log(`Error: ${error}`));
+  connectedServer.on("error", (error) => logger.error(`error ${error}`));
   process.on("exit", (code) => {
     console.log("Exit code -> ", code);
   });

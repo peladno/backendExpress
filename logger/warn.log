@@ -1,0 +1,18 @@
+{
+  message: 'mongoose error MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Aug-31-2022 19:12:45'
+}
+{
+  message: 'Error -2 - Ruta /favicon.ico, Método GET no implementado.',
+  level: 'warn',
+  label: 'Label🏷️',
+  timestamp: 'Aug-31-2022 19:24:15'
+}
+{
+  message: 'mongoose error MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Aug-31-2022 19:24:38'
+}

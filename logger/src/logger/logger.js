@@ -7,11 +7,11 @@ const logger = createLogger({
         level: 'info'
       }),
       new transports.File({
-        filename: '../../logs/warn.log',
+        filename: 'warn.log',
         level: 'warn'
       }),
       new transports.File({
-        filename: '../../logs/error.log',
+        filename: 'error.log',
         level: 'error'
       })
     ],
