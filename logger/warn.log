@@ -28,3 +28,81 @@
   label: 'Label🏷️',
   timestamp: 'Sep-06-2022 21:12:51'
 }
+{
+  message: 'Error -2 - Ruta /favicon.ico, Método GET no implementado.',
+  level: 'warn',
+  label: 'Label🏷️',
+  timestamp: 'Sep-08-2022 22:17:18'
+}
+{
+  message: 'Error -2 - Ruta /l, Método GET no implementado.',
+  level: 'warn',
+  label: 'Label🏷️',
+  timestamp: 'Sep-09-2022 08:15:39'
+}
+{
+  message: 'Error -2 - Ruta /favicon.ico, Método GET no implementado.',
+  level: 'warn',
+  label: 'Label🏷️',
+  timestamp: 'Sep-09-2022 08:42:21'
+}
+{
+  message: 'Error -2 - Ruta /user, Método GET no implementado.',
+  level: 'warn',
+  label: 'Label🏷️',
+  timestamp: 'Sep-09-2022 09:07:15'
+}
+{
+  message: 'Error -2 - Ruta /favicon.ico, Método GET no implementado.',
+  level: 'warn',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 01:28:26'
+}
+{
+  message: 'Error -2 - Ruta /l, Método GET no implementado.',
+  level: 'warn',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 01:53:20'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:56:33'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:57:36'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:57:47'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:57:53'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:58:01'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 04:02:28'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 04:02:55'
+}

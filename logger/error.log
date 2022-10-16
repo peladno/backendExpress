@@ -10,3 +10,45 @@
   label: 'Label🏷️',
   timestamp: 'Aug-31-2022 19:24:38'
 }
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:56:33'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:57:36'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:57:47'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:57:53'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 03:58:01'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 04:02:28'
+}
+{
+  message: 'error Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  label: 'Label🏷️',
+  timestamp: 'Sep-10-2022 04:02:55'
+}

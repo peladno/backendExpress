@@ -44,6 +44,7 @@ app.set("view engine", "ejs");
 app.set("views", "./public/views");
 
 //config
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 ////////////////////////////////End config/////////////////////////////////////
@@ -112,7 +113,7 @@ app.get("/products", async (request, resolve) => {
   resolve.render("productsList", { products });
 });
 app.use("", userRouter);
-app.use("", webRouter);
+//app.use("", webRouter);
 app.use(ruteNotFound);
 
 if (mode === "CLUSTER") {

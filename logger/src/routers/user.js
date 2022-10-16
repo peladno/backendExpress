@@ -11,7 +11,7 @@ passport.use(
   "login",
   new LocalStrategy(async (username, password, done) => {
     try {
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ username: username });
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
@@ -72,13 +72,11 @@ router.get("/", (req, res) => {
 router.get("/login", (req, res) => {
   res.render("login");
 });
-router.post(
-  "/login",
-  passport.authenticate("login", {
-    successRedirect: "/home",
-    failureRedirect: "/login-failure",
-  })
-);
+
+router.post("/login",passport.authenticate("login"), async (req, res) => {
+  res.send("signup succedully");
+  
+});
 
 router.get("/login-failure", (req, res) => {
   res.render("login-failure");
@@ -88,13 +86,23 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.post(
-  "/signup",
-  passport.authenticate("signup", {
-    successRedirect: "/home",
-    failureRedirect: "/signup-failure",
-  })
-);
+router.post("/signup", async (req, res) => {
+  console.log(req.body);
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (user) {
+      res.send({ message: "User already exists" });
+    }
+    const newUser = await User.create({
+      username: req.body.username,
+      password: req.body.password,
+      name: req.body.name,
+    });
+    res.send({user:newUser});
+  } catch (err) {
+  console.log(err);
+  }
+});
 
 router.get("/signup-failure", (req, res) => {
   res.render("signup-failure");
@@ -122,6 +130,10 @@ router.get("/logout", (req, res) => {
       else res.send({ status: "Logout ERROR ", body: err });
     });
   }
+});
+
+router.get("/user", checkAuthentication, (req, res) => {
+  res.send({ user: req.user?.name });
 });
 
 module.exports = router;

@@ -30,4 +30,3 @@ UserSchema.methods.isValidPassword = async function(password){
 
 module.exports = model("User", UserSchema);
 
-
