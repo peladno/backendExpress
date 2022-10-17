@@ -1,0 +1,61 @@
+query {
+  allProducts {
+    id
+    name
+    price
+    description
+    image_url
+    code
+    stock
+    timestamp
+  }
+}
+
+query {
+  getProduct(id: "2") {
+    id
+    name
+    price
+    description
+    image_url
+    code
+    stock
+    timestamp
+  }
+}
+
+query {
+  getCarts {
+    id {
+      products {
+        id
+        name
+        price
+        description
+        image_url
+        code
+        stock
+        timestamp
+      }
+      timestamp: String
+    }
+  }
+}
+
+query {
+  getCart(id: "1") {
+    id {
+      products {
+        id
+        name
+        price
+        description
+        image_url
+        code
+        stock
+        timestamp
+      }
+      timestamp: String
+    }
+  }
+}
