@@ -7,7 +7,7 @@ module.exports = class productsApi {
     this.dao = DAO;
   }
   allProducts = async () => {
-    const data = this.dao.products.getAll;
+    const data = await this.dao.products.getAll;
     return data;
   };
 
